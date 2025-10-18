@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ShopEasyCRM.Models;
+
+public partial class Interaccione
+{
+    public int IdInteraccion { get; set; }
+
+    public int? ClienteId { get; set; }
+
+    public int? CanalId { get; set; }
+
+    public DateTime? Fecha { get; set; }
+
+    public string? Asunto { get; set; }
+
+    public string? Descripcion { get; set; }
+
+    public int? EmpleadoId { get; set; }
+
+    public virtual CanalesComunicacion? Canal { get; set; }
+
+    public virtual Cliente? Cliente { get; set; }
+
+    public virtual Empleado? Empleado { get; set; }
+}
