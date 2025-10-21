@@ -13,56 +13,66 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NumeroCedula" class="control-label"></label>
+                <label asp-for="NumeroCedula" class="control-label">Número de Cedula</label>
                 <input asp-for="NumeroCedula" class="form-control" />
                 <span asp-validation-for="NumeroCedula" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
+                <label asp-for="Nombre" class="control-label">Nombre</label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Apellido1" class="control-label"></label>
+                <label asp-for="Apellido1" class="control-label">Primer Apellido</label>
                 <input asp-for="Apellido1" class="form-control" />
                 <span asp-validation-for="Apellido1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Apellido2" class="control-label"></label>
+                <label asp-for="Apellido2" class="control-label">Segundo Apellido</label>
                 <input asp-for="Apellido2" class="form-control" />
                 <span asp-validation-for="Apellido2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label">Correo Electrónico</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
+                <label asp-for="Telefono" class="control-label">Celular</label>
                 <input asp-for="Telefono" class="form-control" />
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
+                <label asp-for="Direccion" class="control-label">Dirección</label>
                 <input asp-for="Direccion" class="form-control" />
                 <span asp-validation-for="Direccion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProvinciaId" class="control-label"></label>
-                <select asp-for="ProvinciaId" class ="form-control" asp-items="ViewBag.ProvinciaId"></select>
+                <label asp-for="ProvinciaId" class="control-label">Provincia</label>
+                <select asp-for="ProvinciaId" class="form-control" asp-items="ViewBag.ProvinciaId">
+                    <option value="" disabled selected>-- Seleccione una provincia --</option>
+                </select>
+                <span asp-validation-for="ProvinciaId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label"></label>
-                <input asp-for="FechaNacimiento" class="form-control" />
+                <label asp-for="FechaNacimiento" class="control-label">Fecha de nacimiento</label>
+                <input asp-for="FechaNacimiento" type="date" class="form-control" />
                 <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RolId" class="control-label"></label>
-                <select asp-for="RolId" class ="form-control" asp-items="ViewBag.RolId"></select>
+                <label asp-for="RolId" class="control-label">Rol</label>
+                <select asp-for="RolId" class="form-control" asp-items="ViewBag.RolId">
+                    <option value="" disabled selected>-- Seleccione un rol --</option>
+                </select>
+                <span asp-validation-for="RolId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
+                <label asp-for="Estado" class="control-label">Estado</label>
+                <select asp-for="Estado" class="form-control">
+                    <option value="" disabled selected>-- Seleccione el estado --</option>
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="form-group">

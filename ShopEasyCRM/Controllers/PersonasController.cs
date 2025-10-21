@@ -48,8 +48,8 @@ namespace ShopEasyCRM.Controllers
         // GET: Personas/Create
         public IActionResult Create()
         {
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "IdProvincia", "IdProvincia");
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol");
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "IdProvincia", "Nombre");
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "Nombre");
             return View();
         }
 
@@ -84,8 +84,8 @@ namespace ShopEasyCRM.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "IdProvincia", "IdProvincia", persona.ProvinciaId);
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", persona.RolId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "IdProvincia", "Nombre", persona.ProvinciaId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "Nombre", persona.RolId);
             return View(persona);
         }
 
