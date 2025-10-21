@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ShopEasyCRM.Models.Persona>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Personas";
 }
 
 <h1>Personas</h1>
@@ -12,36 +12,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaNacimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provincia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rol)
-            </th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Apellido</th>
+            <th>Correo Electrónico</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Estado</th>
+            <th>Provincia</th>
+            <th>Rol</th>
             <th></th>
         </tr>
     </thead>
@@ -73,15 +53,15 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provincia.IdProvincia)
+                @Html.DisplayFor(modelItem => item.Provincia.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rol.IdRol)
+                @Html.DisplayFor(modelItem => item.Rol.Nombre)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.NumeroCedula">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NumeroCedula">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NumeroCedula">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.NumeroCedula">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.NumeroCedula">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.NumeroCedula">Eliminar</a>
             </td>
         </tr>
 }
