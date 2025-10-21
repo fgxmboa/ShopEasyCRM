@@ -4,7 +4,7 @@ using ShopEasyCRM.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// 🔧 REGISTRO DEL CONTEXTO
+// REGISTRO DEL CONTEXTO
 builder.Services.AddDbContext<ShopEasyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ShopEasyDB")));
 

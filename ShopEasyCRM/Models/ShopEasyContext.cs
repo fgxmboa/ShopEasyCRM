@@ -17,13 +17,9 @@ public partial class ShopEasyContext : DbContext
 
     public virtual DbSet<CanalesComunicacion> CanalesComunicacions { get; set; }
 
-    public virtual DbSet<Cliente> Clientes { get; set; }
-
     public virtual DbSet<ClienteEtiquetum> ClienteEtiqueta { get; set; }
 
     public virtual DbSet<DetallePedido> DetallePedidos { get; set; }
-
-    public virtual DbSet<Empleado> Empleados { get; set; }
 
     public virtual DbSet<Etiqueta> Etiquetas { get; set; }
 
@@ -43,6 +39,8 @@ public partial class ShopEasyContext : DbContext
 
     public virtual DbSet<Pedido> Pedidos { get; set; }
 
+    public virtual DbSet<Persona> Personas { get; set; }
+
     public virtual DbSet<Producto> Productos { get; set; }
 
     public virtual DbSet<Provincia> Provincias { get; set; }
@@ -61,7 +59,7 @@ public partial class ShopEasyContext : DbContext
     {
         modelBuilder.Entity<CanalesComunicacion>(entity =>
         {
-            entity.HasKey(e => e.IdCanal).HasName("PK__canales___D4C01CC8DFFF1B1B");
+            entity.HasKey(e => e.IdCanal).HasName("PK__canales___D4C01CC8E7AB2C80");
 
             entity.ToTable("canales_comunicacion");
 
@@ -78,58 +76,19 @@ public partial class ShopEasyContext : DbContext
                 .HasColumnName("nombre");
         });
 
-        modelBuilder.Entity<Cliente>(entity =>
-        {
-            entity.HasKey(e => e.IdCliente).HasName("PK__clientes__677F38F53D07E393");
-
-            entity.ToTable("clientes");
-
-            entity.Property(e => e.IdCliente)
-                .ValueGeneratedNever()
-                .HasColumnName("id_cliente");
-            entity.Property(e => e.Apellido)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("apellido");
-            entity.Property(e => e.Correo)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("correo");
-            entity.Property(e => e.Direccion)
-                .HasColumnType("text")
-                .HasColumnName("direccion");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(30)
-                .IsUnicode(false)
-                .HasColumnName("estado");
-            entity.Property(e => e.FechaRegistro)
-                .HasColumnType("datetime")
-                .HasColumnName("fecha_registro");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("nombre");
-            entity.Property(e => e.ProvinciaId).HasColumnName("provincia_id");
-            entity.Property(e => e.Telefono)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("telefono");
-
-            entity.HasOne(d => d.Provincia).WithMany(p => p.Clientes)
-                .HasForeignKey(d => d.ProvinciaId)
-                .HasConstraintName("FK__clientes__provin__3F466844");
-        });
-
         modelBuilder.Entity<ClienteEtiquetum>(entity =>
         {
-            entity.HasKey(e => e.IdRelacion).HasName("PK__cliente___51F3AF4C9FB42473");
+            entity.HasKey(e => e.IdClienteEtiqueta).HasName("PK__cliente___8CAC4C6B93FA544C");
 
             entity.ToTable("cliente_etiqueta");
 
-            entity.Property(e => e.IdRelacion)
+            entity.Property(e => e.IdClienteEtiqueta)
                 .ValueGeneratedNever()
-                .HasColumnName("id_relacion");
-            entity.Property(e => e.ClienteId).HasColumnName("cliente_id");
+                .HasColumnName("id_cliente_etiqueta");
+            entity.Property(e => e.ClienteId)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("cliente_id");
             entity.Property(e => e.EtiquetaId).HasColumnName("etiqueta_id");
             entity.Property(e => e.FechaAsignacion)
                 .HasColumnType("datetime")
@@ -137,16 +96,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.ClienteEtiqueta)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__cliente_e__clien__6A30C649");
+                .HasConstraintName("FK__cliente_e__clien__68487DD7");
 
             entity.HasOne(d => d.Etiqueta).WithMany(p => p.ClienteEtiqueta)
                 .HasForeignKey(d => d.EtiquetaId)
-                .HasConstraintName("FK__cliente_e__etiqu__6B24EA82");
+                .HasConstraintName("FK__cliente_e__etiqu__693CA210");
         });
 
         modelBuilder.Entity<DetallePedido>(entity =>
         {
-            entity.HasKey(e => e.IdDetalle).HasName("PK__detalle___4F1332DE5B022126");
+            entity.HasKey(e => e.IdDetalle).HasName("PK__detalle___4F1332DEB06C0A56");
 
             entity.ToTable("detalle_pedido");
 
@@ -165,44 +124,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Pedido).WithMany(p => p.DetallePedidos)
                 .HasForeignKey(d => d.PedidoId)
-                .HasConstraintName("FK__detalle_p__pedid__4AB81AF0");
+                .HasConstraintName("FK__detalle_p__pedid__4BAC3F29");
 
             entity.HasOne(d => d.Producto).WithMany(p => p.DetallePedidos)
                 .HasForeignKey(d => d.ProductoId)
-                .HasConstraintName("FK__detalle_p__produ__4BAC3F29");
-        });
-
-        modelBuilder.Entity<Empleado>(entity =>
-        {
-            entity.HasKey(e => e.IdEmpleado).HasName("PK__empleado__88B5139420AEF0BD");
-
-            entity.ToTable("empleados");
-
-            entity.Property(e => e.IdEmpleado)
-                .ValueGeneratedNever()
-                .HasColumnName("id_empleado");
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("email");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("nombre");
-            entity.Property(e => e.RolId).HasColumnName("rol_id");
-            entity.Property(e => e.Telefono)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("telefono");
-
-            entity.HasOne(d => d.Rol).WithMany(p => p.Empleados)
-                .HasForeignKey(d => d.RolId)
-                .HasConstraintName("FK__empleados__rol_i__4222D4EF");
+                .HasConstraintName("FK__detalle_p__produ__4CA06362");
         });
 
         modelBuilder.Entity<Etiqueta>(entity =>
         {
-            entity.HasKey(e => e.IdEtiqueta).HasName("PK__etiqueta__FA0DD2ADFDED3A13");
+            entity.HasKey(e => e.IdEtiqueta).HasName("PK__etiqueta__FA0DD2AD3065323F");
 
             entity.ToTable("etiquetas");
 
@@ -225,7 +156,7 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<Factura>(entity =>
         {
-            entity.HasKey(e => e.IdFactura).HasName("PK__facturas__6C08ED53CB2CBD4D");
+            entity.HasKey(e => e.IdFactura).HasName("PK__facturas__6C08ED530FEA762E");
 
             entity.ToTable("facturas");
 
@@ -254,25 +185,28 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Pedido).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.PedidoId)
-                .HasConstraintName("FK__facturas__pedido__5535A963");
+                .HasConstraintName("FK__facturas__pedido__534D60F1");
         });
 
         modelBuilder.Entity<HistorialPedido>(entity =>
         {
-            entity.HasKey(e => e.IdHistorial).HasName("PK__historia__76E6C5020EFD56C5");
+            entity.HasKey(e => e.IdHistorial).HasName("PK__historia__76E6C502CCA7F4C3");
 
             entity.ToTable("historial_pedidos");
 
             entity.Property(e => e.IdHistorial)
                 .ValueGeneratedNever()
                 .HasColumnName("id_historial");
-            entity.Property(e => e.ActualizadoPor).HasColumnName("actualizado_por");
+            entity.Property(e => e.ActualizadoPor)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("actualizado_por");
             entity.Property(e => e.EstadoAnterior)
-                .HasMaxLength(30)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("estado_anterior");
             entity.Property(e => e.EstadoNuevo)
-                .HasMaxLength(30)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("estado_nuevo");
             entity.Property(e => e.FechaCambio)
@@ -282,16 +216,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.ActualizadoPorNavigation).WithMany(p => p.HistorialPedidos)
                 .HasForeignKey(d => d.ActualizadoPor)
-                .HasConstraintName("FK__historial__actua__4F7CD00D");
+                .HasConstraintName("FK__historial__actua__5070F446");
 
             entity.HasOne(d => d.Pedido).WithMany(p => p.HistorialPedidos)
                 .HasForeignKey(d => d.PedidoId)
-                .HasConstraintName("FK__historial__pedid__4E88ABD4");
+                .HasConstraintName("FK__historial__pedid__4F7CD00D");
         });
 
         modelBuilder.Entity<Interaccione>(entity =>
         {
-            entity.HasKey(e => e.IdInteraccion).HasName("PK__interacc__0152426C65FD23D6");
+            entity.HasKey(e => e.IdInteraccion).HasName("PK__interacc__0152426C45394A88");
 
             entity.ToTable("interacciones");
 
@@ -303,31 +237,37 @@ public partial class ShopEasyContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("asunto");
             entity.Property(e => e.CanalId).HasColumnName("canal_id");
-            entity.Property(e => e.ClienteId).HasColumnName("cliente_id");
+            entity.Property(e => e.ClienteId)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("cliente_id");
             entity.Property(e => e.Descripcion)
                 .HasColumnType("text")
                 .HasColumnName("descripcion");
-            entity.Property(e => e.EmpleadoId).HasColumnName("empleado_id");
+            entity.Property(e => e.EmpleadoId)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("empleado_id");
             entity.Property(e => e.Fecha)
                 .HasColumnType("datetime")
                 .HasColumnName("fecha");
 
             entity.HasOne(d => d.Canal).WithMany(p => p.Interacciones)
                 .HasForeignKey(d => d.CanalId)
-                .HasConstraintName("FK__interacci__canal__619B8048");
+                .HasConstraintName("FK__interacci__canal__5FB337D6");
 
-            entity.HasOne(d => d.Cliente).WithMany(p => p.Interacciones)
+            entity.HasOne(d => d.Cliente).WithMany(p => p.InteraccioneClientes)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__interacci__clien__60A75C0F");
+                .HasConstraintName("FK__interacci__clien__5EBF139D");
 
-            entity.HasOne(d => d.Empleado).WithMany(p => p.Interacciones)
+            entity.HasOne(d => d.Empleado).WithMany(p => p.InteraccioneEmpleados)
                 .HasForeignKey(d => d.EmpleadoId)
-                .HasConstraintName("FK__interacci__emple__628FA481");
+                .HasConstraintName("FK__interacci__emple__60A75C0F");
         });
 
         modelBuilder.Entity<Inventario>(entity =>
         {
-            entity.HasKey(e => e.IdInventario).HasName("PK__inventar__013AEB5111D8EC34");
+            entity.HasKey(e => e.IdInventario).HasName("PK__inventar__013AEB51827C3A2A");
 
             entity.ToTable("inventario");
 
@@ -341,17 +281,18 @@ public partial class ShopEasyContext : DbContext
             entity.Property(e => e.ProductoId).HasColumnName("producto_id");
             entity.Property(e => e.PuntoReorden).HasColumnName("punto_reorden");
             entity.Property(e => e.Ubicacion)
-                .HasColumnType("text")
+                .HasMaxLength(150)
+                .IsUnicode(false)
                 .HasColumnName("ubicacion");
 
             entity.HasOne(d => d.Producto).WithMany(p => p.Inventarios)
                 .HasForeignKey(d => d.ProductoId)
-                .HasConstraintName("FK__inventari__produ__52593CB8");
+                .HasConstraintName("FK__inventari__produ__44FF419A");
         });
 
         modelBuilder.Entity<LogsFacturacion>(entity =>
         {
-            entity.HasKey(e => e.IdLog).HasName("PK__logs_fac__6CC851FE1366CF09");
+            entity.HasKey(e => e.IdLog).HasName("PK__logs_fac__6CC851FE4A31C9A4");
 
             entity.ToTable("logs_facturacion");
 
@@ -365,20 +306,23 @@ public partial class ShopEasyContext : DbContext
             entity.Property(e => e.Fecha)
                 .HasColumnType("datetime")
                 .HasColumnName("fecha");
-            entity.Property(e => e.GeneradoPor).HasColumnName("generado_por");
+            entity.Property(e => e.GeneradoPor)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("generado_por");
 
             entity.HasOne(d => d.Factura).WithMany(p => p.LogsFacturacions)
                 .HasForeignKey(d => d.FacturaId)
-                .HasConstraintName("FK__logs_fact__factu__5812160E");
+                .HasConstraintName("FK__logs_fact__factu__5629CD9C");
 
             entity.HasOne(d => d.GeneradoPorNavigation).WithMany(p => p.LogsFacturacions)
                 .HasForeignKey(d => d.GeneradoPor)
-                .HasConstraintName("FK__logs_fact__gener__59063A47");
+                .HasConstraintName("FK__logs_fact__gener__571DF1D5");
         });
 
         modelBuilder.Entity<MetodosPago>(entity =>
         {
-            entity.HasKey(e => e.IdMetodo).HasName("PK__metodos___1BBFF0F4B2C479C4");
+            entity.HasKey(e => e.IdMetodo).HasName("PK__metodos___1BBFF0F458BDE00C");
 
             entity.ToTable("metodos_pago");
 
@@ -397,14 +341,17 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<Notificacione>(entity =>
         {
-            entity.HasKey(e => e.IdNotificacion).HasName("PK__notifica__8270F9A550AFFF35");
+            entity.HasKey(e => e.IdNotificacion).HasName("PK__notifica__8270F9A5ED7F1DEA");
 
             entity.ToTable("notificaciones");
 
             entity.Property(e => e.IdNotificacion)
                 .ValueGeneratedNever()
                 .HasColumnName("id_notificacion");
-            entity.Property(e => e.ClienteId).HasColumnName("cliente_id");
+            entity.Property(e => e.ClienteId)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("cliente_id");
             entity.Property(e => e.FechaEnvio)
                 .HasColumnType("datetime")
                 .HasColumnName("fecha_envio");
@@ -413,27 +360,30 @@ public partial class ShopEasyContext : DbContext
                 .HasColumnType("text")
                 .HasColumnName("mensaje");
             entity.Property(e => e.Tipo)
-                .HasMaxLength(30)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("tipo");
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.Notificaciones)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__notificac__clien__6E01572D");
+                .HasConstraintName("FK__notificac__clien__6C190EBB");
         });
 
         modelBuilder.Entity<Pedido>(entity =>
         {
-            entity.HasKey(e => e.IdPedido).HasName("PK__pedidos__6FF0148966BC6ED8");
+            entity.HasKey(e => e.IdPedido).HasName("PK__pedidos__6FF01489AD7E12D2");
 
             entity.ToTable("pedidos");
 
             entity.Property(e => e.IdPedido)
                 .ValueGeneratedNever()
                 .HasColumnName("id_pedido");
-            entity.Property(e => e.ClienteId).HasColumnName("cliente_id");
+            entity.Property(e => e.ClienteId)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("cliente_id");
             entity.Property(e => e.Estado)
-                .HasMaxLength(30)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("estado");
             entity.Property(e => e.FechaPedido)
@@ -446,16 +396,63 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__pedidos__cliente__46E78A0C");
+                .HasConstraintName("FK__pedidos__cliente__47DBAE45");
 
             entity.HasOne(d => d.MetodoPago).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.MetodoPagoId)
-                .HasConstraintName("FK__pedidos__metodo___47DBAE45");
+                .HasConstraintName("FK__pedidos__metodo___48CFD27E");
+        });
+
+        modelBuilder.Entity<Persona>(entity =>
+        {
+            entity.HasKey(e => e.NumeroCedula).HasName("PK__personas__AF0FC8F4604D324D");
+
+            entity.ToTable("personas");
+
+            entity.Property(e => e.NumeroCedula)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("numero_cedula");
+            entity.Property(e => e.Apellido1)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("apellido1");
+            entity.Property(e => e.Apellido2)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("apellido2");
+            entity.Property(e => e.Direccion)
+                .HasColumnType("text")
+                .HasColumnName("direccion");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.Estado).HasColumnName("estado");
+            entity.Property(e => e.FechaNacimiento).HasColumnName("fecha_nacimiento");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("nombre");
+            entity.Property(e => e.ProvinciaId).HasColumnName("provincia_id");
+            entity.Property(e => e.RolId).HasColumnName("rol_id");
+            entity.Property(e => e.Telefono)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("telefono");
+
+            entity.HasOne(d => d.Provincia).WithMany(p => p.Personas)
+                .HasForeignKey(d => d.ProvinciaId)
+                .HasConstraintName("FK__personas__provin__3F466844");
+
+            entity.HasOne(d => d.Rol).WithMany(p => p.Personas)
+                .HasForeignKey(d => d.RolId)
+                .HasConstraintName("FK__personas__rol_id__403A8C7D");
         });
 
         modelBuilder.Entity<Producto>(entity =>
         {
-            entity.HasKey(e => e.IdProducto).HasName("PK__producto__FF341C0D7467E27E");
+            entity.HasKey(e => e.IdProducto).HasName("PK__producto__FF341C0DD0ABEE66");
 
             entity.ToTable("productos");
 
@@ -466,6 +463,10 @@ public partial class ShopEasyContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("categoria");
+            entity.Property(e => e.CodigoBarras)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("codigo_barras");
             entity.Property(e => e.Descripcion)
                 .HasColumnType("text")
                 .HasColumnName("descripcion");
@@ -478,14 +479,14 @@ public partial class ShopEasyContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("nombre");
             entity.Property(e => e.Precio)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(12, 2)")
                 .HasColumnName("precio");
             entity.Property(e => e.Stock).HasColumnName("stock");
         });
 
         modelBuilder.Entity<Provincia>(entity =>
         {
-            entity.HasKey(e => e.IdProvincia).HasName("PK__provinci__66C18BFD8CE486DF");
+            entity.HasKey(e => e.IdProvincia).HasName("PK__provinci__66C18BFD214D3AD5");
 
             entity.ToTable("provincias");
 
@@ -493,14 +494,14 @@ public partial class ShopEasyContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id_provincia");
             entity.Property(e => e.Nombre)
-                .HasMaxLength(80)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
         });
 
         modelBuilder.Entity<ReportesActividad>(entity =>
         {
-            entity.HasKey(e => e.IdReporte).HasName("PK__reportes__87E4F5CBB436F650");
+            entity.HasKey(e => e.IdReporte).HasName("PK__reportes__87E4F5CBB4755D71");
 
             entity.ToTable("reportes_actividad");
 
@@ -513,23 +514,23 @@ public partial class ShopEasyContext : DbContext
             entity.Property(e => e.FechaGeneracion)
                 .HasColumnType("datetime")
                 .HasColumnName("fecha_generacion");
-            entity.Property(e => e.GeneradoPor).HasColumnName("generado_por");
+            entity.Property(e => e.GeneradoPor)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("generado_por");
             entity.Property(e => e.TipoReporte)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("tipo_reporte");
-            entity.Property(e => e.Ubicacion)
-                .HasColumnType("text")
-                .HasColumnName("ubicacion");
 
             entity.HasOne(d => d.GeneradoPorNavigation).WithMany(p => p.ReportesActividads)
                 .HasForeignKey(d => d.GeneradoPor)
-                .HasConstraintName("FK__reportes___gener__656C112C");
+                .HasConstraintName("FK__reportes___gener__6383C8BA");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.IdRol).HasName("PK__roles__6ABCB5E045243EC5");
+            entity.HasKey(e => e.IdRol).HasName("PK__roles__6ABCB5E02F78347D");
 
             entity.ToTable("roles");
 
@@ -541,14 +542,14 @@ public partial class ShopEasyContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("descripcion");
             entity.Property(e => e.Nombre)
-                .HasMaxLength(80)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
         });
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.IdTicket).HasName("PK__tickets__48C6F52388C15EEC");
+            entity.HasKey(e => e.IdTicket).HasName("PK__tickets__48C6F523832A0562");
 
             entity.ToTable("tickets");
 
@@ -560,11 +561,17 @@ public partial class ShopEasyContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("categoria");
-            entity.Property(e => e.ClienteId).HasColumnName("cliente_id");
+            entity.Property(e => e.ClienteId)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("cliente_id");
             entity.Property(e => e.Descripcion)
                 .HasColumnType("text")
                 .HasColumnName("descripcion");
-            entity.Property(e => e.EmpleadoId).HasColumnName("empleado_id");
+            entity.Property(e => e.EmpleadoId)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("empleado_id");
             entity.Property(e => e.Estado)
                 .HasMaxLength(30)
                 .IsUnicode(false)
@@ -582,15 +589,15 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Canal).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.CanalId)
-                .HasConstraintName("FK__tickets__canal_i__5DCAEF64");
+                .HasConstraintName("FK__tickets__canal_i__5BE2A6F2");
 
-            entity.HasOne(d => d.Cliente).WithMany(p => p.Tickets)
+            entity.HasOne(d => d.Cliente).WithMany(p => p.TicketClientes)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__tickets__cliente__5BE2A6F2");
+                .HasConstraintName("FK__tickets__cliente__59FA5E80");
 
-            entity.HasOne(d => d.Empleado).WithMany(p => p.Tickets)
+            entity.HasOne(d => d.Empleado).WithMany(p => p.TicketEmpleados)
                 .HasForeignKey(d => d.EmpleadoId)
-                .HasConstraintName("FK__tickets__emplead__5CD6CB2B");
+                .HasConstraintName("FK__tickets__emplead__5AEE82B9");
         });
 
         OnModelCreatingPartial(modelBuilder);

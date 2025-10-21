@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShopEasyCRM.Models.Cliente>
+﻿@model IEnumerable<ShopEasyCRM.Models.Persona>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,10 +16,13 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apellido)
+                @Html.DisplayNameFor(model => model.Apellido1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Correo)
+                @Html.DisplayNameFor(model => model.Apellido2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefono)
@@ -28,13 +31,16 @@
                 @Html.DisplayNameFor(model => model.Direccion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Provincia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol)
             </th>
             <th></th>
         </tr>
@@ -46,10 +52,13 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
+                @Html.DisplayFor(modelItem => item.Apellido1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Correo)
+                @Html.DisplayFor(modelItem => item.Apellido2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Telefono)
@@ -58,7 +67,7 @@
                 @Html.DisplayFor(modelItem => item.Direccion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Estado)
@@ -67,9 +76,12 @@
                 @Html.DisplayFor(modelItem => item.Provincia.IdProvincia)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCliente">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCliente">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCliente">Delete</a>
+                @Html.DisplayFor(modelItem => item.Rol.IdRol)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.NumeroCedula">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.NumeroCedula">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.NumeroCedula">Delete</a>
             </td>
         </tr>
 }

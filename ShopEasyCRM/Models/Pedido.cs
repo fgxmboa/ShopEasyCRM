@@ -7,7 +7,7 @@ public partial class Pedido
 {
     public int IdPedido { get; set; }
 
-    public int? ClienteId { get; set; }
+    public string? ClienteId { get; set; }
 
     public int? MetodoPagoId { get; set; }
 
@@ -17,7 +17,7 @@ public partial class Pedido
 
     public decimal? Total { get; set; }
 
-    public virtual Cliente? Cliente { get; set; }
+    public virtual Persona? Cliente { get; set; }
 
     public virtual ICollection<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
 

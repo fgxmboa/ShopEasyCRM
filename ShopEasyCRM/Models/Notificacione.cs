@@ -7,7 +7,7 @@ public partial class Notificacione
 {
     public int IdNotificacion { get; set; }
 
-    public int? ClienteId { get; set; }
+    public string? ClienteId { get; set; }
 
     public string? Mensaje { get; set; }
 
@@ -17,5 +17,5 @@ public partial class Notificacione
 
     public bool? Leido { get; set; }
 
-    public virtual Cliente? Cliente { get; set; }
+    public virtual Persona? Cliente { get; set; }
 }

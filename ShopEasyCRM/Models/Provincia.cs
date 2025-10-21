@@ -9,5 +9,5 @@ public partial class Provincia
 
     public string? Nombre { get; set; }
 
-    public virtual ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
+    public virtual ICollection<Persona> Personas { get; set; } = new List<Persona>();
 }

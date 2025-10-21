@@ -15,9 +15,9 @@ public partial class HistorialPedido
 
     public DateTime? FechaCambio { get; set; }
 
-    public int? ActualizadoPor { get; set; }
+    public string? ActualizadoPor { get; set; }
 
-    public virtual Empleado? ActualizadoPorNavigation { get; set; }
+    public virtual Persona? ActualizadoPorNavigation { get; set; }
 
     public virtual Pedido? Pedido { get; set; }
 }

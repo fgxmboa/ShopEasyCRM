@@ -11,11 +11,9 @@ public partial class ReportesActividad
 
     public DateTime? FechaGeneracion { get; set; }
 
-    public int? GeneradoPor { get; set; }
-
-    public string? Ubicacion { get; set; }
+    public string? GeneradoPor { get; set; }
 
     public string? Descripcion { get; set; }
 
-    public virtual Empleado? GeneradoPorNavigation { get; set; }
+    public virtual Persona? GeneradoPorNavigation { get; set; }
 }

@@ -7,7 +7,7 @@ public partial class Interaccione
 {
     public int IdInteraccion { get; set; }
 
-    public int? ClienteId { get; set; }
+    public string? ClienteId { get; set; }
 
     public int? CanalId { get; set; }
 
@@ -17,11 +17,11 @@ public partial class Interaccione
 
     public string? Descripcion { get; set; }
 
-    public int? EmpleadoId { get; set; }
+    public string? EmpleadoId { get; set; }
 
     public virtual CanalesComunicacion? Canal { get; set; }
 
-    public virtual Cliente? Cliente { get; set; }
+    public virtual Persona? Cliente { get; set; }
 
-    public virtual Empleado? Empleado { get; set; }
+    public virtual Persona? Empleado { get; set; }
 }

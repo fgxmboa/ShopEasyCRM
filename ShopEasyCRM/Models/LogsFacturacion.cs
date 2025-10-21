@@ -13,9 +13,9 @@ public partial class LogsFacturacion
 
     public string? Detalle { get; set; }
 
-    public int? GeneradoPor { get; set; }
+    public string? GeneradoPor { get; set; }
 
     public virtual Factura? Factura { get; set; }
 
-    public virtual Empleado? GeneradoPorNavigation { get; set; }
+    public virtual Persona? GeneradoPorNavigation { get; set; }
 }
