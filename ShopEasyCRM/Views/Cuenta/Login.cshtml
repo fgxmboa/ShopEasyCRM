@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Login";
+
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        form input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+            form input:focus {
+                border-color: #4CAF50;
+                outline: none;
+                box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            }
+
+        form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            form button:hover {
+                background-color: #43A047;
+            }
+
+        .error-message {
+            color: #D32F2F;
+            margin-top: -15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+
+        <form method="post">
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Contraseña" required />
+            <button type="submit">Ingresar</button>
+        </form>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="error-message">@ViewBag.Error</p>
+        }
+    </div>
+</body>
+</html>
