@@ -4,88 +4,131 @@
     ViewData["Title"] = "Crear Personas";
 }
 
-<h1>Ingresar nueva persona</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-<h4></h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NumeroCedula" class="control-label">Número de Cedula</label>
-                <input asp-for="NumeroCedula" class="form-control" />
-                <span asp-validation-for="NumeroCedula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label">Nombre</label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellido1" class="control-label">Primer Apellido</label>
-                <input asp-for="Apellido1" class="form-control" />
-                <span asp-validation-for="Apellido1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellido2" class="control-label">Segundo Apellido</label>
-                <input asp-for="Apellido2" class="form-control" />
-                <span asp-validation-for="Apellido2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label">Correo Electrónico</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label">Celular</label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label">Dirección</label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProvinciaId" class="control-label">Provincia</label>
-                <select asp-for="ProvinciaId" class="form-control" asp-items="ViewBag.ProvinciaId">
-                    <option value="" disabled selected>-- Seleccione una provincia --</option>
-                </select>
-                <span asp-validation-for="ProvinciaId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label">Fecha de nacimiento</label>
-                <input asp-for="FechaNacimiento" type="date" class="form-control" />
-                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RolId" class="control-label">Rol</label>
-                <select asp-for="RolId" class="form-control" asp-items="ViewBag.RolId">
-                    <option value="" disabled selected>-- Seleccione un rol --</option>
-                </select>
-                <span asp-validation-for="RolId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label">Estado</label>
-                <select asp-for="Estado" class="form-control">
-                    <option value="" disabled selected>-- Seleccione el estado --</option>
-                    <option value="true">Activo</option>
-                    <option value="false">Inactivo</option>
-                </select>
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container my-5">
+    <div class="card shadow-lg border-primary mx-auto" style="max-width: 700px;">
+        <div class="card-header bg-primary text-white d-flex align-items-center">
+            <i class="fa-solid fa-user-plus fa-lg me-3"></i>
+            <h3 class="mb-0 fw-bold">Ingresar nueva persona</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="NumeroCedula" class="form-label">Número de Cedula</label>
+                        <input asp-for="NumeroCedula" class="form-control" />
+                        <span asp-validation-for="NumeroCedula" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Nombre" class="form-label">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Apellido1" class="form-label">Primer Apellido</label>
+                        <input asp-for="Apellido1" class="form-control" />
+                        <span asp-validation-for="Apellido1" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Apellido2" class="form-label">Segundo Apellido</label>
+                        <input asp-for="Apellido2" class="form-control" />
+                        <span asp-validation-for="Apellido2" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">Correo Electrónico</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Telefono" class="form-label">Celular</label>
+                        <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Direccion" class="form-label">Dirección</label>
+                        <input asp-for="Direccion" class="form-control" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="ProvinciaId" class="form-label">Provincia</label>
+                        <select asp-for="ProvinciaId" class="form-select" asp-items="ViewBag.ProvinciaId">
+                            <option value="" disabled selected>-- Seleccione una provincia --</option>
+                        </select>
+                        <span asp-validation-for="ProvinciaId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="FechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                        <input asp-for="FechaNacimiento" type="date" class="form-control" />
+                        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="RolId" class="form-label">Rol</label>
+                        <select asp-for="RolId" class="form-select" asp-items="ViewBag.RolId">
+                            <option value="" disabled selected>-- Seleccione un rol --</option>
+                        </select>
+                        <span asp-validation-for="RolId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Estado" class="form-label">Estado</label>
+                        <select asp-for="Estado" class="form-select">
+                            <option value="" disabled selected>-- Seleccione el estado --</option>
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <input type="submit" value="Crear" class="btn btn-primary btn-lg shadow-sm" />
+                    <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm"><i class="fa-solid fa-arrow-left me-2"></i>Volver a la lista</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border-radius: 15px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+    dt {
+        font-weight: 500;
+    }
+
+    .btn {
+        font-weight: 600;
+    }
+</style>
+

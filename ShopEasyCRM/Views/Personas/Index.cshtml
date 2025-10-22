@@ -1,69 +1,98 @@
 ﻿@model IEnumerable<ShopEasyCRM.Models.Persona>
 
 @{
-    ViewData["Title"] = "Personas";
+    ViewData["Title"] = "Listado de Personas";
 }
 
-<h1>Personas</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-<p>
-    <a asp-action="Create">Crear nueva persona</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Apellido</th>
-            <th>Correo Electrónico</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Estado</th>
-            <th>Provincia</th>
-            <th>Rol</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaNacimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provincia.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rol.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NumeroCedula">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.NumeroCedula">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.NumeroCedula">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container my-5">
+    <div class="card shadow-lg border-primary">
+        <div class="card-header bg-primary text-white d-flex align-items-center">
+            <i class="fa-solid fa-users fa-lg me-3"></i>
+            <h3 class="mb-0 fw-bold">Listado de Personas</h3>
+            <a asp-action="Create" class="btn btn-success btn-sm ms-auto shadow-sm">
+                <i class="fa-solid fa-user-plus me-2"></i>Crear nueva persona
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido1</th>
+                            <th>Apellido2</th>
+                            <th>Correo Electrónico</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Estado</th>
+                            <th>Provincia</th>
+                            <th>Rol</th>
+                            <th style="width: 160px;">Acciones</th> <!-- ancho fijo -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Nombre</td>
+                                <td>@item.Apellido1</td>
+                                <td>@item.Apellido2</td>
+                                <td>@item.Email</td>
+                                <td>@item.Telefono</td>
+                                <td>@item.Direccion</td>
+                                <td>@(item.FechaNacimiento?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                <td>@(item.Estado.HasValue ? (item.Estado.Value ? "Activo" : "Inactivo") : "-")</td>
+                                <td>@item.Provincia?.Nombre ?? "-"</td>
+                                <td>@item.Rol?.Nombre ?? "-"</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.NumeroCedula" class="btn btn-warning btn-sm me-1 shadow-sm">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.NumeroCedula" class="btn btn-info btn-sm me-1 shadow-sm text-white">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.NumeroCedula" class="btn btn-danger btn-sm shadow-sm">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border-radius: 15px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+    .btn {
+        font-weight: 600;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f0f8ff;
+        transition: 0.2s;
+    }
+</style>
