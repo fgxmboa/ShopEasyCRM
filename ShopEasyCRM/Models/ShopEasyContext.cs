@@ -15,6 +15,8 @@ public partial class ShopEasyContext : DbContext
     {
     }
 
+    public virtual DbSet<Usuario> Usuarios { get; set; }
+
     public virtual DbSet<CanalesComunicacion> CanalesComunicacions { get; set; }
 
     public virtual DbSet<ClienteEtiquetum> ClienteEtiqueta { get; set; }
@@ -59,7 +61,7 @@ public partial class ShopEasyContext : DbContext
     {
         modelBuilder.Entity<CanalesComunicacion>(entity =>
         {
-            entity.HasKey(e => e.IdCanal).HasName("PK__canales___D4C01CC8E7AB2C80");
+            entity.HasKey(e => e.IdCanal).HasName("PK_canales__D4C01CC8E7AB2C80");
 
             entity.ToTable("canales_comunicacion");
 
@@ -78,7 +80,7 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<ClienteEtiquetum>(entity =>
         {
-            entity.HasKey(e => e.IdClienteEtiqueta).HasName("PK__cliente___8CAC4C6B93FA544C");
+            entity.HasKey(e => e.IdClienteEtiqueta).HasName("PK_cliente__8CAC4C6B93FA544C");
 
             entity.ToTable("cliente_etiqueta");
 
@@ -96,16 +98,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.ClienteEtiqueta)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__cliente_e__clien__68487DD7");
+                .HasConstraintName("FK_cliente_eclien_68487DD7");
 
             entity.HasOne(d => d.Etiqueta).WithMany(p => p.ClienteEtiqueta)
                 .HasForeignKey(d => d.EtiquetaId)
-                .HasConstraintName("FK__cliente_e__etiqu__693CA210");
+                .HasConstraintName("FK_cliente_eetiqu_693CA210");
         });
 
         modelBuilder.Entity<DetallePedido>(entity =>
         {
-            entity.HasKey(e => e.IdDetalle).HasName("PK__detalle___4F1332DEB06C0A56");
+            entity.HasKey(e => e.IdDetalle).HasName("PK_detalle__4F1332DEB06C0A56");
 
             entity.ToTable("detalle_pedido");
 
@@ -124,16 +126,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Pedido).WithMany(p => p.DetallePedidos)
                 .HasForeignKey(d => d.PedidoId)
-                .HasConstraintName("FK__detalle_p__pedid__4BAC3F29");
+                .HasConstraintName("FK_detalle_ppedid_4BAC3F29");
 
             entity.HasOne(d => d.Producto).WithMany(p => p.DetallePedidos)
                 .HasForeignKey(d => d.ProductoId)
-                .HasConstraintName("FK__detalle_p__produ__4CA06362");
+                .HasConstraintName("FK_detalle_pprodu_4CA06362");
         });
 
         modelBuilder.Entity<Etiqueta>(entity =>
         {
-            entity.HasKey(e => e.IdEtiqueta).HasName("PK__etiqueta__FA0DD2AD3065323F");
+            entity.HasKey(e => e.IdEtiqueta).HasName("PK_etiqueta_FA0DD2AD3065323F");
 
             entity.ToTable("etiquetas");
 
@@ -156,7 +158,7 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<Factura>(entity =>
         {
-            entity.HasKey(e => e.IdFactura).HasName("PK__facturas__6C08ED530FEA762E");
+            entity.HasKey(e => e.IdFactura).HasName("PK_facturas_6C08ED530FEA762E");
 
             entity.ToTable("facturas");
 
@@ -185,12 +187,12 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Pedido).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.PedidoId)
-                .HasConstraintName("FK__facturas__pedido__534D60F1");
+                .HasConstraintName("FK_facturaspedido_534D60F1");
         });
 
         modelBuilder.Entity<HistorialPedido>(entity =>
         {
-            entity.HasKey(e => e.IdHistorial).HasName("PK__historia__76E6C502CCA7F4C3");
+            entity.HasKey(e => e.IdHistorial).HasName("PK_historia_76E6C502CCA7F4C3");
 
             entity.ToTable("historial_pedidos");
 
@@ -216,16 +218,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.ActualizadoPorNavigation).WithMany(p => p.HistorialPedidos)
                 .HasForeignKey(d => d.ActualizadoPor)
-                .HasConstraintName("FK__historial__actua__5070F446");
+                .HasConstraintName("FK_historialactua_5070F446");
 
             entity.HasOne(d => d.Pedido).WithMany(p => p.HistorialPedidos)
                 .HasForeignKey(d => d.PedidoId)
-                .HasConstraintName("FK__historial__pedid__4F7CD00D");
+                .HasConstraintName("FK_historialpedid_4F7CD00D");
         });
 
         modelBuilder.Entity<Interaccione>(entity =>
         {
-            entity.HasKey(e => e.IdInteraccion).HasName("PK__interacc__0152426C45394A88");
+            entity.HasKey(e => e.IdInteraccion).HasName("PK_interacc_0152426C45394A88");
 
             entity.ToTable("interacciones");
 
@@ -254,20 +256,20 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Canal).WithMany(p => p.Interacciones)
                 .HasForeignKey(d => d.CanalId)
-                .HasConstraintName("FK__interacci__canal__5FB337D6");
+                .HasConstraintName("FK_interaccicanal_5FB337D6");
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.InteraccioneClientes)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__interacci__clien__5EBF139D");
+                .HasConstraintName("FK_interacciclien_5EBF139D");
 
             entity.HasOne(d => d.Empleado).WithMany(p => p.InteraccioneEmpleados)
                 .HasForeignKey(d => d.EmpleadoId)
-                .HasConstraintName("FK__interacci__emple__60A75C0F");
+                .HasConstraintName("FK_interacciemple_60A75C0F");
         });
 
         modelBuilder.Entity<Inventario>(entity =>
         {
-            entity.HasKey(e => e.IdInventario).HasName("PK__inventar__013AEB51827C3A2A");
+            entity.HasKey(e => e.IdInventario).HasName("PK_inventar_013AEB51827C3A2A");
 
             entity.ToTable("inventario");
 
@@ -287,12 +289,12 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Producto).WithMany(p => p.Inventarios)
                 .HasForeignKey(d => d.ProductoId)
-                .HasConstraintName("FK__inventari__produ__44FF419A");
+                .HasConstraintName("FK_inventariprodu_44FF419A");
         });
 
         modelBuilder.Entity<LogsFacturacion>(entity =>
         {
-            entity.HasKey(e => e.IdLog).HasName("PK__logs_fac__6CC851FE4A31C9A4");
+            entity.HasKey(e => e.IdLog).HasName("PK_logs_fac_6CC851FE4A31C9A4");
 
             entity.ToTable("logs_facturacion");
 
@@ -313,16 +315,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Factura).WithMany(p => p.LogsFacturacions)
                 .HasForeignKey(d => d.FacturaId)
-                .HasConstraintName("FK__logs_fact__factu__5629CD9C");
+                .HasConstraintName("FK_logs_factfactu_5629CD9C");
 
             entity.HasOne(d => d.GeneradoPorNavigation).WithMany(p => p.LogsFacturacions)
                 .HasForeignKey(d => d.GeneradoPor)
-                .HasConstraintName("FK__logs_fact__gener__571DF1D5");
+                .HasConstraintName("FK_logs_factgener_571DF1D5");
         });
 
         modelBuilder.Entity<MetodosPago>(entity =>
         {
-            entity.HasKey(e => e.IdMetodo).HasName("PK__metodos___1BBFF0F458BDE00C");
+            entity.HasKey(e => e.IdMetodo).HasName("PK_metodos__1BBFF0F458BDE00C");
 
             entity.ToTable("metodos_pago");
 
@@ -341,7 +343,7 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<Notificacione>(entity =>
         {
-            entity.HasKey(e => e.IdNotificacion).HasName("PK__notifica__8270F9A5ED7F1DEA");
+            entity.HasKey(e => e.IdNotificacion).HasName("PK_notifica_8270F9A5ED7F1DEA");
 
             entity.ToTable("notificaciones");
 
@@ -366,12 +368,12 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.Notificaciones)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__notificac__clien__6C190EBB");
+                .HasConstraintName("FK_notificacclien_6C190EBB");
         });
 
         modelBuilder.Entity<Pedido>(entity =>
         {
-            entity.HasKey(e => e.IdPedido).HasName("PK__pedidos__6FF01489AD7E12D2");
+            entity.HasKey(e => e.IdPedido).HasName("PK_pedidos_6FF01489AD7E12D2");
 
             entity.ToTable("pedidos");
 
@@ -396,16 +398,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__pedidos__cliente__47DBAE45");
+                .HasConstraintName("FK_pedidoscliente_47DBAE45");
 
             entity.HasOne(d => d.MetodoPago).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.MetodoPagoId)
-                .HasConstraintName("FK__pedidos__metodo___48CFD27E");
+                .HasConstraintName("FK_pedidosmetodo__48CFD27E");
         });
 
         modelBuilder.Entity<Persona>(entity =>
         {
-            entity.HasKey(e => e.NumeroCedula).HasName("PK__personas__AF0FC8F4604D324D");
+            entity.HasKey(e => e.NumeroCedula).HasName("PK_personas_AF0FC8F4604D324D");
 
             entity.ToTable("personas");
 
@@ -443,16 +445,16 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Provincia).WithMany(p => p.Personas)
                 .HasForeignKey(d => d.ProvinciaId)
-                .HasConstraintName("FK__personas__provin__3F466844");
+                .HasConstraintName("FK_personasprovin_3F466844");
 
             entity.HasOne(d => d.Rol).WithMany(p => p.Personas)
                 .HasForeignKey(d => d.RolId)
-                .HasConstraintName("FK__personas__rol_id__403A8C7D");
+                .HasConstraintName("FK_personasrol_id_403A8C7D");
         });
 
         modelBuilder.Entity<Producto>(entity =>
         {
-            entity.HasKey(e => e.IdProducto).HasName("PK__producto__FF341C0DD0ABEE66");
+            entity.HasKey(e => e.IdProducto).HasName("PK_producto_FF341C0DD0ABEE66");
 
             entity.ToTable("productos");
 
@@ -486,7 +488,7 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<Provincia>(entity =>
         {
-            entity.HasKey(e => e.IdProvincia).HasName("PK__provinci__66C18BFD214D3AD5");
+            entity.HasKey(e => e.IdProvincia).HasName("PK_provinci_66C18BFD214D3AD5");
 
             entity.ToTable("provincias");
 
@@ -501,7 +503,7 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<ReportesActividad>(entity =>
         {
-            entity.HasKey(e => e.IdReporte).HasName("PK__reportes__87E4F5CBB4755D71");
+            entity.HasKey(e => e.IdReporte).HasName("PK_reportes_87E4F5CBB4755D71");
 
             entity.ToTable("reportes_actividad");
 
@@ -525,12 +527,12 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.GeneradoPorNavigation).WithMany(p => p.ReportesActividads)
                 .HasForeignKey(d => d.GeneradoPor)
-                .HasConstraintName("FK__reportes___gener__6383C8BA");
+                .HasConstraintName("FK_reportes_gener_6383C8BA");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.IdRol).HasName("PK__roles__6ABCB5E02F78347D");
+            entity.HasKey(e => e.IdRol).HasName("PK_roles_6ABCB5E02F78347D");
 
             entity.ToTable("roles");
 
@@ -549,7 +551,7 @@ public partial class ShopEasyContext : DbContext
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.IdTicket).HasName("PK__tickets__48C6F523832A0562");
+            entity.HasKey(e => e.IdTicket).HasName("PK_tickets_48C6F523832A0562");
 
             entity.ToTable("tickets");
 
@@ -589,15 +591,15 @@ public partial class ShopEasyContext : DbContext
 
             entity.HasOne(d => d.Canal).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.CanalId)
-                .HasConstraintName("FK__tickets__canal_i__5BE2A6F2");
+                .HasConstraintName("FK_ticketscanal_i_5BE2A6F2");
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.TicketClientes)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__tickets__cliente__59FA5E80");
+                .HasConstraintName("FK_ticketscliente_59FA5E80");
 
             entity.HasOne(d => d.Empleado).WithMany(p => p.TicketEmpleados)
                 .HasForeignKey(d => d.EmpleadoId)
-                .HasConstraintName("FK__tickets__emplead__5AEE82B9");
+                .HasConstraintName("FK_ticketsemplead_5AEE82B9");
         });
 
         OnModelCreatingPartial(modelBuilder);

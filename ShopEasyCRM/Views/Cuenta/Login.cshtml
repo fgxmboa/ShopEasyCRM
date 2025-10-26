@@ -1,8 +1,6 @@
 ﻿@{
     ViewBag.Title = "Login";
-
     Layout = null;
-
 }
 
 <!DOCTYPE html>
@@ -10,9 +8,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - Shop Easy</title>
+
     <style>
-        /* Reset básico */
+        /* ===== Reset y tipografía ===== */
         * {
             margin: 0;
             padding: 0;
@@ -25,72 +24,104 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #4CAF50, #81C784);
+            background: linear-gradient(135deg, #def7ff, #6eb8f5);
         }
 
+        /* ===== Contenedor principal ===== */
         .login-container {
-            background-color: #fff;
-            padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background-color: #ffffff;
+            padding: 40px 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             width: 90%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        h2 {
+            .login-container:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            }
+
+        /* ===== Encabezado ===== */
+        .brand-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin-bottom: 30px;
-            color: #333;
         }
 
+            .brand-header h1 {
+                font-size: 32px;
+                font-weight: 800;
+                color: #2196f3;
+                margin-bottom: 8px;
+            }
+
+            .brand-header span {
+                color: #6eb8f5;
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+        /* ===== Campos del formulario ===== */
         form input {
             width: 100%;
             padding: 12px 15px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            border: 1px solid #c3e3fd;
+            border-radius: 10px;
             font-size: 16px;
-            transition: 0.3s;
+            background-color: #f9fcff;
+            transition: all 0.3s ease;
         }
 
             form input:focus {
-                border-color: #4CAF50;
+                border-color: #2196f3;
+                background-color: #ffffff;
+                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
                 outline: none;
-                box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
             }
 
+        /* ===== Botón ===== */
         form button {
             width: 100%;
             padding: 12px;
-            background-color: #4CAF50;
+            background-color: #2196f3;
             border: none;
             color: white;
             font-size: 18px;
-            border-radius: 8px;
+            font-weight: 600;
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
             form button:hover {
-                background-color: #43A047;
+                background-color: #1976d2;
+                transform: translateY(-2px);
             }
 
+        /* ===== Mensaje de error ===== */
         .error-message {
-            color: #D32F2F;
-            margin-top: -15px;
-            margin-bottom: 10px;
+            color: #d32f2f;
+            margin-top: 15px;
             font-size: 14px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h2>Iniciar Sesión</h2>
+        <div class="brand-header">
+            <h1>Shop Easy</h1>
+        </div>
 
         <form method="post">
-            <input type="email" name="email" placeholder="Email" required />
+            <input type="email" name="email" placeholder="Correo electrónico" required />
             <input type="password" name="password" placeholder="Contraseña" required />
-            <button type="submit">Ingresar</button>
+            <button type="submit">Iniciar Sesión</button>
         </form>
 
         @if (ViewBag.Error != null)
