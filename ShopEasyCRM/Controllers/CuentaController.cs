@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopEasyCRM.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 using System.Linq;
 
 namespace ShopEasyCRM.Controllers
 {
-
-    using Microsoft.AspNetCore.Mvc;
-    using System.Linq;
-
     public class CuentaController : Controller
     {
         private readonly ShopEasyContext _context;
@@ -17,19 +16,36 @@ namespace ShopEasyCRM.Controllers
             _context = context;
         }
 
-        // GET y POST combinados
-        [HttpGet, HttpPost]
-        public IActionResult Login(string email = null, string password = null)
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(string email, string password)
         {
             if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
             {
-                // Buscar usuario
                 var usuario = _context.Usuarios
                     .FirstOrDefault(u => u.Email == email && u.Password == password);
 
                 if (usuario != null)
                 {
-                    // Usuario válido, redirige directo al Home
+                    // Crear claims para el usuario
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, usuario.Email),
+                        new Claim("UsuarioId", usuario.Id.ToString())
+                    };
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                    // Iniciar sesión con cookie
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -41,21 +57,17 @@ namespace ShopEasyCRM.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            // Cerrar sesión de cookie
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-       [HttpPost]
-[ValidateAntiForgeryToken]
-public IActionResult Logout()
-{
-    // 🔒 Limpia toda la sesión
-    HttpContext.Session.Clear();
+            // Limpiar sesión si la estás usando
+            HttpContext.Session.Clear();
 
-    // 🔒 Limpia cookies si las usas
-    Response.Cookies.Delete(".AspNetCore.Cookies");
-
-    // 🔁 Redirige al login
-    return RedirectToAction("Login", "Cuenta");
-}
-
-
+            return RedirectToAction("Login", "Cuenta");
+        }
     }
 }
