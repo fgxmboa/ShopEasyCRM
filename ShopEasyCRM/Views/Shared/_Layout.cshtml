@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <!-- 🧭 Navbar -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
@@ -39,7 +40,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                <i class="fa-solid fa-shield-halved me-1"></i> Privacidad
+                            </a>
+                        </li>
+
+                        <!-- 🚪 Cerrar sesión -->
+                        <li class="nav-item ms-3">
+                            <form asp-controller="Login" asp-action="Logout" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-logout d-flex align-items-center">
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>
