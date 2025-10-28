@@ -53,7 +53,7 @@ namespace ShopEasyCRM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProducto,CodigoBarras,Nombre,Descripcion,Precio,Categoria,Stock,Estado")] Producto producto)
+        public async Task<IActionResult> Create([Bind("CodigoBarras,Nombre,Descripcion,Precio,Categoria,Stock,Estado")] Producto producto)
         {
             if (ModelState.IsValid)
             {

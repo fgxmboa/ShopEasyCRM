@@ -459,7 +459,7 @@ public partial class ShopEasyContext : DbContext
             entity.ToTable("productos");
 
             entity.Property(e => e.IdProducto)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id_producto");
             entity.Property(e => e.Categoria)
                 .HasMaxLength(50)
