@@ -10,6 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - Shop Easy</title>
 
+    <!-- Font Awesome para el ícono de casita -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
     <style>
         /* ===== Reset y tipografía ===== */
         * {
@@ -52,17 +55,16 @@
             margin-bottom: 30px;
         }
 
+            .brand-header i {
+                color: #2196f3;
+                margin-bottom: 10px;
+            }
+
             .brand-header h1 {
                 font-size: 32px;
                 font-weight: 800;
                 color: #2196f3;
                 margin-bottom: 8px;
-            }
-
-            .brand-header span {
-                color: #6eb8f5;
-                font-size: 16px;
-                font-weight: 500;
             }
 
         /* ===== Campos del formulario ===== */
@@ -115,6 +117,7 @@
 <body>
     <div class="login-container">
         <div class="brand-header">
+            <i class="fa-solid fa-store fa-4x mb-3"></i>
             <h1>Shop Easy</h1>
         </div>
 

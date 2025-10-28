@@ -14,17 +14,17 @@ builder.Services.AddDbContext<ShopEasyContext>(options =>
 // HABILITAR SESIONES
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // tiempo de inactividad antes de expirar
-    options.Cookie.HttpOnly = true; // por seguridad, la cookie solo accesible por el servidor
-    options.Cookie.IsEssential = true; // necesaria incluso si el usuario no da consentimiento de cookies
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
+    options.Cookie.HttpOnly = true; 
+    options.Cookie.IsEssential = true; 
 });
 
 // AGREGAR AUTENTICACIÓN POR COOKIES
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Cuenta/Login";   // Página de login
-        options.LogoutPath = "/Cuenta/Logout"; // Página de logout
+        options.LoginPath = "/Cuenta/Login";   
+        options.LogoutPath = "/Cuenta/Logout"; 
     });
 
 // AGREGAR FILTRO GLOBAL para evitar que el navegador guarde páginas en caché
