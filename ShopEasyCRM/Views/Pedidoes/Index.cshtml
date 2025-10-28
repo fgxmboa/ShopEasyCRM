@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ShopEasyCRM.Models.Pedido>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de pedidos</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo pedido</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetodoPago)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.NumeroCedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetodoPago.IdMetodo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdPedido">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPedido">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPedido">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
