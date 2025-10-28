@@ -40,5 +40,22 @@ namespace ShopEasyCRM.Controllers
 
             return View();
         }
+
+
+       [HttpPost]
+[ValidateAntiForgeryToken]
+public IActionResult Logout()
+{
+    // 🔒 Limpia toda la sesión
+    HttpContext.Session.Clear();
+
+    // 🔒 Limpia cookies si las usas
+    Response.Cookies.Delete(".AspNetCore.Cookies");
+
+    // 🔁 Redirige al login
+    return RedirectToAction("Login", "Cuenta");
+}
+
+
     }
 }

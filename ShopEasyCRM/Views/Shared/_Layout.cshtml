@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/ShopEasyCRM.styles.css" asp-append-version="true" />
 
     <style>
-        /* 🎨 Paleta personalizada */
+        /* Paleta personalizada */
         :root {
             --color-primary: #2196f3;
             --color-secondary: #6eb8f5;
@@ -29,7 +29,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 🧭 Navbar */
+        /* Navbar */
         .navbar {
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
@@ -51,7 +51,7 @@
                 color: var(--color-light) !important;
             }
 
-        /* 🔒 Botón Cerrar sesión */
+        /* Botón Cerrar sesión */
         .btn-logout {
             background-color: var(--color-danger);
             border: none;
@@ -67,7 +67,7 @@
                 transform: translateY(-2px);
             }
 
-        /* 📦 Contenedor principal */
+        /* Contenedor principal */
         main {
             background-color: white;
             padding: 2rem;
@@ -78,7 +78,7 @@
             border-top: 5px solid var(--color-primary);
         }
 
-        /* 💠 Cards */
+        /* Cards */
         .card {
             border-radius: 15px;
             border: 1px solid var(--color-light);
@@ -97,7 +97,7 @@
             font-weight: 600;
         }
 
-        /* 🦶 Footer */
+        /* Footer */
         footer {
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
             color: white;
@@ -118,7 +118,7 @@
 </head>
 
 <body>
-    <!-- 🧭 Navbar -->
+    <!-- Navbar -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
@@ -148,9 +148,10 @@
                             </a>
                         </li>
 
-                        <!-- 🚪 Cerrar sesión -->
+                        <!-- Cerrar sesión -->
                         <li class="nav-item ms-3">
-                            <form asp-controller="Login" asp-action="Logout" method="post" class="d-inline">
+                            <form asp-controller="Cuenta" asp-action="Logout" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
                                 <button type="submit" class="btn btn-logout d-flex align-items-center">
                                     <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión
                                 </button>

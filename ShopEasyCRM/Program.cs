@@ -1,23 +1,37 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopEasyCRM.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 // REGISTRO DEL CONTEXTO
 builder.Services.AddDbContext<ShopEasyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ShopEasyDB")));
 
-// MVC
-builder.Services.AddControllersWithViews();
+// HABILITAR SESIONES
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // tiempo de inactividad antes de expirar
+    options.Cookie.HttpOnly = true; // por seguridad, la cookie solo accesible por el servidor
+    options.Cookie.IsEssential = true; // necesaria incluso si el usuario no da consentimiento de cookies
+});
+
+// AGREGAR FILTRO GLOBAL para evitar que el navegador guarde páginas en caché
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new ResponseCacheAttribute
+    {
+        NoStore = true,
+        Location = ResponseCacheLocation.None,
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// PIPELINE HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -25,6 +39,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// ACTIVAR SESIONES
+app.UseSession();
 
 app.UseAuthorization();
 
