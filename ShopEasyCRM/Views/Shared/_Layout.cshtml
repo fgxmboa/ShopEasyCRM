@@ -12,6 +12,115 @@
     <!-- Estilos propios -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ShopEasyCRM.styles.css" asp-append-version="true" />
+
+    <style>
+        /* 🎨 Paleta personalizada */
+        :root {
+            --color-primary: #2196f3;
+            --color-secondary: #6eb8f5;
+            --color-tertiary: #9acef8;
+            --color-light: #c3e3fd;
+            --color-bg: #e8f5ff;
+        }
+
+        /* 🌈 Fondo general */
+        body {
+            background-color: var(--color-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 🧭 Navbar */
+        .navbar {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            font-size: 1.4rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: #f8f9fa !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: var(--color-light) !important;
+            }
+
+        /* 📦 Contenedor principal */
+        main {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-top: 30px;
+            margin-bottom: 40px;
+            border-top: 5px solid var(--color-primary);
+        }
+
+        /* 💠 Cards o secciones internas */
+        .card {
+            border-radius: 15px;
+            border: 1px solid var(--color-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            }
+
+        .card-header {
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-tertiary));
+            color: white;
+            font-weight: 600;
+        }
+
+        /* 🧷 Botones */
+        .btn-primary {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+            .btn-primary:hover {
+                background-color: var(--color-secondary);
+                border-color: var(--color-secondary);
+            }
+
+        .btn-info {
+            background-color: var(--color-tertiary);
+            border-color: var(--color-tertiary);
+            color: #003366;
+        }
+
+            .btn-info:hover {
+                background-color: var(--color-secondary);
+                color: white;
+            }
+
+        /* 🦶 Footer */
+        footer {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            footer a {
+                color: var(--color-light);
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                    color: var(--color-tertiary);
+                }
+    </style>
 </head>
 
 <body>
@@ -28,7 +137,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto align-items-center">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Productos" asp-action="Index">
                                 <i class="fa-solid fa-boxes-stacked me-1"></i> Productos
@@ -43,15 +152,6 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
                                 <i class="fa-solid fa-shield-halved me-1"></i> Privacidad
                             </a>
-                        </li>
-
-                        <!-- 🚪 Cerrar sesión -->
-                        <li class="nav-item ms-3">
-                            <form asp-controller="Login" asp-action="Logout" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-logout d-flex align-items-center">
-                                    <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión
-                                </button>
-                            </form>
                         </li>
                     </ul>
                 </div>
@@ -81,3 +181,4 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
