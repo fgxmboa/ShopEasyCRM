@@ -25,7 +25,7 @@
                 <dd class="col-sm-8">@Model.Descripcion</dd>
 
                 <dt class="col-sm-4 fw-semibold">Precio:</dt>
-                <dd class="col-sm-8">@Model.Precio?.ToString("C") ?? "-"</dd>
+                <dd class="col-sm-8">@((Model.Precio?.ToString("C")) ?? "-")</dd>
 
                 <dt class="col-sm-4 fw-semibold">Categoría:</dt>
                 <dd class="col-sm-8">@Model.Categoria</dd>
